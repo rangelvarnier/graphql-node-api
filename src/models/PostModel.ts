@@ -25,7 +25,7 @@ export default (
   DataTypes: Sequelize.DataTypes,
 ): PostModel => {
   const Post: PostModel = sequelize.define(
-    'Posts',
+    'Post',
     {
       id: {
         type: DataTypes.INTEGER,

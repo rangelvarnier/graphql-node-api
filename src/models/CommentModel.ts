@@ -5,8 +5,8 @@ import { ModelsInterface } from '../interfaces/ModeslInterface';
 export interface CommentAttributes {
   id?: number;
   comment?: string;
-  post?: number;
   user?: number;
+  post?: number;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -24,7 +24,7 @@ export default (
   DataTypes: Sequelize.DataTypes,
 ): CommentModel => {
   const Comment: CommentModel = sequelize.define(
-    'Comments',
+    'Comment',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -41,19 +41,19 @@ export default (
   );
 
   Comment.associate = (models: ModelsInterface): void => {
-    Comment.belongsTo(models.Post, {
-      foreignKey: {
-        allowNull: false,
-        field: 'post',
-        name: 'post',
-      },
-    });
-
     Comment.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
         field: 'user',
         name: 'user',
+      },
+    });
+
+    Comment.belongsTo(models.Post, {
+      foreignKey: {
+        allowNull: false,
+        field: 'post',
+        name: 'post',
       },
     });
   };
