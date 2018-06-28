@@ -38,6 +38,7 @@ export const userResolvers = {
       { db }: { db: DbConnectionInterface },
       info: GraphQLResolveInfo,
     ) => {
+      id = parseInt(id);
       return db.User.findById(id)
         .then((user: UserInstance) => {
           if (!user) {
@@ -49,7 +50,7 @@ export const userResolvers = {
     },
   },
 
-  Mutations: {
+  Mutation: {
     createUser: (
       parent,
       args,

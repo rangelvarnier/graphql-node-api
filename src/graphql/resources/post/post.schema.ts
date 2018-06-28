@@ -11,7 +11,7 @@ const postTypes = `
     comments(first: Int, offset: Int): [Comment!]!
   }
 
-  input PostCreateInput {
+  input PostInput {
     title: String!
     content: String!
     photo: String!
@@ -25,8 +25,8 @@ const postQueries = `
 `;
 
 const postMutations = `
-  createPost(input: PostCreateInput!): Post
-  updatePost(id: ID!, input: PostCreateInput!): Post
+  createPost(input: PostInput!): Post
+  updatePost(id: ID!, input: PostInput!): Post
   deletePost(id: ID!): Boolean
 `;
 

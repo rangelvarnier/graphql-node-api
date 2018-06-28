@@ -47,6 +47,7 @@ export const postResolvers = {
       { db }: { db: DbConnectionInterface },
       info: GraphQLResolveInfo,
     ) => {
+      id = parseInt(id);
       return db.Post.findById(id)
         .then((post: PostInstance) => {
           if (!post) throw new Error(`Post with id ${id} not found`);
@@ -56,7 +57,7 @@ export const postResolvers = {
     },
   },
 
-  Mutations: {
+  Mutation: {
     createPost: (
       parent,
       args,
@@ -75,9 +76,9 @@ export const postResolvers = {
       { db }: { db: DbConnectionInterface },
       info: GraphQLResolveInfo,
     ) => {
+      id = parseInt(id);
       return db.sequelize
         .transaction((t: Transaction) => {
-          id = parseInt(id);
           return db.Post.findById(id).then((post: PostInstance) => {
             if (!post) throw new Error(`post id ${id} not found`);
             return post.update(input, { t: Transaction });
@@ -91,9 +92,9 @@ export const postResolvers = {
       { db }: { db: DbConnectionInterface },
       info: GraphQLResolveInfo,
     ) => {
+      id = parseInt(id);
       return db.sequelize
         .transaction((t: Transaction) => {
-          id = parseInt(id);
           return db.Post.findById(id).then((post: PostInstance) => {
             if (!post) throw new Error(`post id ${id} not found`);
             return post.destroy({ transaction: t }).then(post => !!post);

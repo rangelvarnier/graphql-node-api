@@ -30,6 +30,7 @@ export const commentResolvers = {
       { db }: { db: DbConnectionInterface },
       info: GraphQLResolveInfo,
     ) => {
+      postId = parseInt(postId);
       return db.Comment.findAll({
         where: { post: postId },
         limit: first,
@@ -37,7 +38,7 @@ export const commentResolvers = {
       }).catch(handleError);
     },
   },
-  Mutations: {
+  Mutation: {
     createComment: (
       parent,
       { input },
